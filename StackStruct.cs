@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace stack
 {
-    public class StackStruct<T>
+    public class StackStruct<T>:IEnumerable<T>
     {
-        private T[] stack;
+        public T[] stack;
         private int top;
         private int maxSize;
         private int reseredSize;
@@ -70,6 +71,16 @@ namespace stack
             {
                 Console.WriteLine(stack[i]);
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 

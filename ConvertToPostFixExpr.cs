@@ -38,7 +38,16 @@ namespace stack
                     }
                     else
                     {
-                        if(cuOperator.Item2>
+                        if(cuOperator.Item2> Operator.Peek().Item2)
+                        {
+                            for(int j = Operator.Count()-1;j<=0; j--)
+                            {
+                                if (Operator.stack[i].Item2 < cuOperator.Item2)
+                                {
+                                    outPut+=Operator.Pop().Item1;
+                                }
+                            }
+                        }
                     }
                 }
                 else

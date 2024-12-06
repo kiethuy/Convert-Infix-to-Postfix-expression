@@ -43,9 +43,10 @@ namespace stack
             }
             else
             {
-                result = stack[--this.top];
-                stack[--this.top] = default;
-                count--;
+                --this.top;
+                result = stack[this.top];
+                stack[this.top] = default;
+                --count;
             }
             return result;
         }

@@ -7,13 +7,10 @@ namespace StackStucture
     {
         static public void Main()
         {
-            StackStruct stack = new StackStruct(3, 0);
-            stack.Push(2);
-            stack.Push(3);
-            stack.Push(4);
-
-            //Console.WriteLine(stack.Pop());
-            stack.ShowStack();
+            ConvertToPostFixExpr convertToPostFixExpr= new ConvertToPostFixExpr();
+            string input= "3+5+4";
+            string output =convertToPostFixExpr.Convert(input.ToCharArray());
+            Console.WriteLine(output);
         }
     }
 }

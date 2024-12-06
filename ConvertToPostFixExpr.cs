@@ -8,8 +8,8 @@ namespace stack
 {
     internal class ConvertToPostFixExpr
     {
-        char[] postFix;
-        List<Tuple<char, int>> operators;
+        public char[] postFix;
+        public List<Tuple<char, int>> operators;
         public ConvertToPostFixExpr()
         {
             operators = new List<Tuple<char, int>>();
@@ -20,7 +20,7 @@ namespace stack
             operators.Add(new Tuple<char,int>('+', 1));
             operators.Add(new Tuple<char,int>('-', 1));
         }
-        public void Convert(char[] infix)
+        public string Convert(char[] infix)
         {
             Tuple<char, int> cuOperator;
             Tuple<char, int> topStackOperator;
@@ -40,11 +40,21 @@ namespace stack
                     {
                         if(cuOperator.Item2> Operator.Peek().Item2)
                         {
-                            for(int j = Operator.Count()-1;j<=0; j--)
+                            Operator.Push(cuOperator);
+                        }
+                        else
+                        {
+                            for (int j= Operator.Count()-1; j >= 0; j--)
                             {
-                                if (Operator.stack[i].Item2 < cuOperator.Item2)
+                                if(Operator.stack[j]!= null 
+                                    && 
+                                    Operator.stack[j]== Operator.Peek())
                                 {
-                                    outPut+=Operator.Pop().Item1;
+                                    if (cuOperator.Item2 > Operator.stack[j].Item2)
+                                    {
+                                        break;
+                                    }
+                                    outPut += Operator.Pop().Item1;
                                 }
                             }
                         }
@@ -52,28 +62,14 @@ namespace stack
                 }
                 else
                 {
-
+                    outPut += infix[i];
+                    if (i== infix.Length)
+                    {
+                        outPut += Operator.Pop();
+                    }
                 }
             }
-        }
-        private void CheckPriority(char curentOpera, char OpraInTopStack)
-        {
-            Tuple<char, int> cuOperator;
-            Tuple<char, int> topStackOperator;
-            this.operators.ForEach
-            (
-               item =>
-               {
-                   if (curentOpera== item.Item1)
-                   {
-                       cuOperator = new Tuple<char, int>(item.Item1, item.Item2);
-                   }
-                   else if (OpraInTopStack == item.Item1)
-                   {
-                       topStackOperator = new Tuple<char, int>(item.Item1, item.Item2);
-                   }
-               }
-            );
+            return outPut;
         }
     }
 }

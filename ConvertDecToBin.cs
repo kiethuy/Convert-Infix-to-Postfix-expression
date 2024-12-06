@@ -8,8 +8,8 @@ namespace stack
 {
     public class ConvertDecToBin
     {
-        public StackStruct result;
-        public ConvertDecToBin(StackStruct result)
+        public StackStruct<int> result;
+        public ConvertDecToBin(StackStruct<int> result)
         {
             this.result = result;
         }
